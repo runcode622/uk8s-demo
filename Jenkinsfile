@@ -26,7 +26,7 @@ spec:
   ) {
     node(POD_LABEL) {
         stage('Clone') {
-            git url: '{{REPO}}'
+            git url: 'https://github.com/ucloud/uk8s-demo.git'
         }
         stage('Compile') {
             container('golang') {
@@ -38,7 +38,7 @@ spec:
         stage('Build Image')
             container('kaniko') {
                 sh """
-                /kaniko/executor -c `pwd`/ -f `pwd`/image/Dockerfile -d {{IMAGE}}
+                /kaniko/executor -c `pwd`/ -f `pwd`/image/Dockerfile -d uhub.service.ucloud.cn/uk8sdemo/executor:debug
                 """
             }
        stage('Deploy') {
